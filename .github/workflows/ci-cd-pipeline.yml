@@ -12,10 +12,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3  # Clone the repo to the runner
 
-      - name: Set up SSH for GitLab
-        uses: webfactory/ssh-agent@v0.5.3  # Set up SSH agent for the GitLab authentication
-        with:
-          ssh-private-key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GITLAB_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
       - name: Clone GitLab repository
         run: |
