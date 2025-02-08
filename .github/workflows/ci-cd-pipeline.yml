@@ -11,7 +11,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3  # Clone the repo to the runner
-        
+
+      - name: Set up SSH for GitLab
+        uses: webfactory/ssh-agent@v0.5.3  # Set up SSH agent for the GitLab authentication
+        with:
+          ssh-private-key: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+
       - name: Clone GitLab repository
         run: |
           git clone git@gitlab.com:homeworks2075006/cloudride.git
