@@ -18,11 +18,6 @@ jobs:
           echo "${{ secrets.GITLAB_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-
-      - name: Clone GitLab repository
-        run: |
-          git clone git@gitlab.com:homeworks2075006/cloudride.git
-          cd cloudride
           
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2  # Install Terraform
@@ -41,6 +36,11 @@ jobs:
         run: |
           aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 753392824297.dkr.ecr.us-west-2.amazonaws.com
 
+      - name: Clone GitLab repository
+        run: |
+          git clone git@gitlab.com:homeworks2075006/cloudride.git
+          cd cloudride
+          
       - name: Build Docker Image
         run: |
           docker build -t hello-world-repo .  
