@@ -11,7 +11,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3  # Clone the repo to the runner
-
+        
+      - name: Clone GitLab repository
+        run: |
+          git clone https://yonatan_azizi:glpat-MFeK7Uj5Ne8Wd5KXPadV@gitlab.com/yonatan_azizi/cloudride.git
+          cd cloudride
+          
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2  # Install Terraform
 
