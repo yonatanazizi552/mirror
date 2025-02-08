@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3  # Clone the repo to the runner
 
+      - name: Check Repository Content
+        run: ls -al  # List all files in the repository
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2  # Install Terraform
 
